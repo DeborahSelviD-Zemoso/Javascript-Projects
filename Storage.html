@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <style>
+        #score-container {
+            display: flex;
+            font-size: 10rem;
+        }
+        #score-container > div {
+            flex-grow: 1;
+            text-align: center;
+        }
+        button {
+            font-size: 1rem;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border-radius: 10px;
+        }
+    </style>
+    <script>
+        const createScoreElement = (id, value) => {
+            const scoreContainer = document.getElementById(id);
+            const scoreElement = scoreContainer.getElementsByTagName('div');
+            scoreElement[0].textContent = value;
+        }
+
+        const incrementLocal = () => {
+            let localScore = localStorage.getItem('localScore');
+            localScore = (localScore && !isNaN(localScore)) ? Number(localScore) + 1 : 1;
+            localStorage.setItem('localScore', localScore);
+            createScoreElement('local-score', localScore);
+        }
+
+        const incrementSession = () => {
+            let sessionScore = sessionStorage.getItem('sessionScore');
+            sessionScore = (sessionScore && !isNaN(sessionScore)) ? Number(sessionScore) + 1 : 1;
+            sessionStorage.setItem('sessionScore', sessionScore);
+            createScoreElement('session-score', sessionScore);
+        }
+
+        const load = () => {
+            let localScore = localStorage.getItem('localScore');
+            let sessionScore = sessionStorage.getItem('sessionScore');
+            createScoreElement('local-score', (localScore && !isNaN(localScore)) ? localScore : 0);
+            createScoreElement('session-score', (sessionScore && !isNaN(sessionScore)) ? sessionScore : 0);
+        }
+
+    </script>
+</head>
+
+<body onload="load()">
+    <div id="score-container">
+        <div id="local-score">
+            <div></div>
+            <button onclick="incrementLocal()">Increase Local</button>
+        </div>
+        <div id="session-score">
+            <div></div>
+            <button onclick="incrementSession()">Increase Session</button>
+        </div>
+    </div>
+</body>
+
+</html>
