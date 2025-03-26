@@ -1,6 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
 
 <head>
+    <title>Search Bar with Debouncing</title>
     <style>
         table,
         th,
@@ -22,7 +24,7 @@
     </style>
     <script>
 
-        let flowwerlist;
+        let flowerlist;
 
 
         let createTableHeading = (name) => {
@@ -344,9 +346,8 @@
 
         let searchFlowers = () => {
             setTimeout(() => {
-                let flowers = JSON.parse(JSON.stringify(flowerlist));
                 let searchText = document.getElementById('search').value;
-                flowers = flowerlist.filter(flower => flower.name.toLowerCase().includes(searchText.toLowerCase()));
+                let flowers = flowerlist.filter(flower => flower.name.toLowerCase().includes(searchText.toLowerCase()));
                 displayFlowers(flowers);
             }, 500);
         }
